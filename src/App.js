@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import DishesList from './components/DishesList';
+import DishCard from './components/DishCard';
+import { BrowserRouter, Route,Routes } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
-  return (
+  const [selected,setSelected]=useState([])
+
+  const addRemoveToggleButton=(id)=>{
+          setSelected((prev)=>
+          prev.includes(id)?prev.filter((dish)=>dish!==id):[...prev,id])
+  }
+    
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<DishesList selected={selected} addRemoveToggleButton={addRemoveToggleButton}/>}/>
+        <Route path="/dishcard/:id" element={<DishCard selected={selected} addRemoveToggleButton={addRemoveToggleButton} />}/>
+      </Routes>
+      </BrowserRouter>
     </div>
   );
 }
