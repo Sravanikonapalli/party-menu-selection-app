@@ -3,6 +3,8 @@ import { dishes } from "../data/DishesData";
 import '../styles/styles.css'
 import { useState } from "react";
 import IngredientsModal from "./IngredientsModal";
+import { IoArrowUndoOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 function DishCard({addRemoveToggleButton,selected=[]}) {
     const {id}=useParams()
@@ -11,7 +13,9 @@ function DishCard({addRemoveToggleButton,selected=[]}) {
     const [isModalOpen,setIsModalOpen]=useState(false)
 
     return (
-        <div>
+        <>
+        <Link to="/" className="back-link"><IoArrowUndoOutline size={50}/></Link>
+        <div>   
             <img src={dish.category.image} alt={dish.name} className="dish"/>
             <div>
             <h1>{dish.name}</h1>
@@ -30,6 +34,7 @@ function DishCard({addRemoveToggleButton,selected=[]}) {
                 ingredients={dish.ingredients}
             />    
         </div>
+        </>
     )
 
 }
